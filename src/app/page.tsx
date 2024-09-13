@@ -279,17 +279,17 @@ export default function Home() {
             <div className='mx-auto max-w-2xl sm:text-center'>
               <h2
                 className='order-1 mt-2 tracking-tight text-center text-balance 
-            !leading-tight font-bold text-5xl md:text-6xl text-gray-900
-            '>
+                 !leading-tight font-bold text-5xl md:text-6xl text-gray-900
+                   '>
                 Upload your photo and get{' '}
-                <span className='relative px-2 text-nowrap'>
+                <span className='relative px-2 sm:text-nowrap'>
                   your own case
                   <Icons.underline
                     className='hidden sm:block pointer-events-none 
                                 absolute inset-x-0 -bottom-6 text-green-500 h-16 w-full'
                   />
                 </span>
-                now
+                <span>now</span>
               </h2>
             </div>
           </div>
@@ -300,26 +300,26 @@ export default function Home() {
                 alt=''
                 width={126}
                 height={31}
-                className='absolute top-[25rem] md:top-1/2 -translate-y-1/2 z-10
+                className='absolute top-1/2 -translate-y-1/2 z-10
                 left-1/2 -translate-x-1/2 rotate-90 md:rotate-0
                 '
               />
               <div
-                className='relative h-80 md:h-full w-full md:justify-self-end 
+                className='relative w-full md:justify-self-end h-[523px] md:h-auto
               max-w-sm rounded-xl bg-gray-900/5 ring-inset ring-gray-900/10 lg:rounded-2xl
               '>
                 <Image
                   src='/horse.jpg'
                   alt='horse-image'
-                  width={850}
-                  height={1280}
+                  width={384}
+                  height={490}
                   className='rounded-md object-cover bg-white shadow-2xl ring-1
-                   ring-gray-900/10 h-full w-full'
+                   ring-gray-900/10 h-full md:h-auto'
                 />
               </div>
               <Phone
                 imgSrc='/horse_phone.jpg'
-                className='w-60'
+                className='w-64'
               />
             </div>
           </div>

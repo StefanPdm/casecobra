@@ -3,7 +3,7 @@ import MaxWidthWrapper from './MaxWidthWrapper';
 
 export default function Footer() {
   return (
-    <footer className='bg-white relative border-t border-gray-200 '>
+    <footer className='bg-white relative border-t border-gray-200 h-[4.5rem]'>
       <MaxWidthWrapper>
         <div
           className='h-full flex flex-col md:flex-row
