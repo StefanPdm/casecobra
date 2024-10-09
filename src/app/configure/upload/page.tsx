@@ -5,18 +5,46 @@ import { Loader2, MousePointerSquareDashed, Image as PlaceholderImage } from 'lu
 import { useState, useTransition } from 'react';
 import Dropzone, { FileRejection } from 'react-dropzone';
 import { Progress } from '@/components/ui/progress';
-
-interface pageProps {}
+import { useUploadThing } from '@/lib/uploadthing';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Page() {
+  const { toast } = useToast();
   const isUploading = false;
   const [isPending, startTransition] = useTransition();
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
-  const onDropRejected = () => {};
+  const router = useRouter();
+
+  const { startUpload } = useUploadThing('imageUploader', {
+    // imageUploader comes from core.ts
+    onClientUploadComplete: ([data]) => {
+      // in this case data = configId (defined in core.ts)
+      const configId = data.serverData.configId;
+      startTransition(() => {
+        router.push(`/configure/design?id=${configId}`);
+      });
+    },
+    onUploadProgress(p) {
+      setUploadProgress(p);
+    },
+  });
+
+  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+    console.log('Files rejected:', rejectedFiles);
+    const [file] = rejectedFiles;
+    setIsDragOver(false);
+    toast({
+      title: `${file.file.type} type is not allowed.`,
+      description: `Please choose a PNG, JPG or JPEG image instead.`,
+      variant: 'destructive', // means the background turns red
+    });
+  };
   const onDropAccepted = (acceptedFiles: File[]) => {
     console.log('Files accepted:', acceptedFiles);
-    // setIsDragOver(false);
+    startUpload(acceptedFiles, { configId: undefined });
+    setIsDragOver(false);
   };
 
   return (
@@ -37,6 +65,7 @@ export default function Page() {
             'image/jpeg': ['.jpeg'],
             'image/webp': ['.webp'],
             'image/tiff': ['.tiff'],
+            'image/bmp': ['.bmp'],
           }}
           onDragEnter={() => {
             console.log('drag enter');
@@ -80,13 +109,14 @@ export default function Page() {
                   </p>
                 ) : (
                   <p>
-                    <span className='font-semibold'>Drag and drop </span>or 'click' to upload.
+                    <span className='font-semibold'>Drag and drop </span>or &apos;click&apos; to
+                    upload your image.
                   </p>
                 )}
               </div>
               {!isPending && (
                 <p className='text-xs text-zinc-500'>
-                  Limited to 5MB and PNG, JPG and JPEG formats only.
+                  Limited to 4MB and PNG, JPG and JPEG formats only.
                 </p>
               )}
             </div>
