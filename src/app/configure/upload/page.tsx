@@ -11,13 +11,12 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function Page() {
   const { toast } = useToast();
-  const isUploading = false;
   const [isPending, startTransition] = useTransition();
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const router = useRouter();
 
-  const { startUpload } = useUploadThing('imageUploader', {
+  const { startUpload, isUploading } = useUploadThing('imageUploader', {
     // imageUploader comes from core.ts
     onClientUploadComplete: ([data]) => {
       // in this case data = configId (defined in core.ts)
@@ -37,10 +36,11 @@ export default function Page() {
     setIsDragOver(false);
     toast({
       title: `${file.file.type} type is not allowed.`,
-      description: `Please choose a PNG, JPG or JPEG image instead.`,
+      description: `Please choose a PNG, BMP, JPG or JPEG image instead.`,
       variant: 'destructive', // means the background turns red
     });
   };
+
   const onDropAccepted = (acceptedFiles: File[]) => {
     console.log('Files accepted:', acceptedFiles);
     startUpload(acceptedFiles, { configId: undefined });
@@ -105,7 +105,7 @@ export default function Page() {
                   </div>
                 ) : isDragOver ? (
                   <p>
-                    <span className='font-semibold'>Drop here </span>to upload.
+                    <span className='font-semibold'>Drop your image here </span>to upload.
                   </p>
                 ) : (
                   <p>
@@ -116,7 +116,7 @@ export default function Page() {
               </div>
               {!isPending && (
                 <p className='text-xs text-zinc-500'>
-                  Limited to 4MB and PNG, JPG and JPEG formats only.
+                  Limited to 4MB and PNG, BMP, JPG and JPEG formats only.
                 </p>
               )}
             </div>

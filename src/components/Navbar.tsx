@@ -9,7 +9,7 @@ export default async function Navbar() {
 
   const user = await getUser();
   // const isAdmin = user?.email === process.env.ADMIN_EMAIL;
-  console.log(process.env.ADMIN_EMAILS);
+  console.log('Navbar.tsx:', process.env.ADMIN_EMAILS);
   const adminEmails = process.env.ADMIN_EMAILS?.split(',') || [];
   const isAdmin = user?.email && adminEmails.includes(user.email);
   // const isAdmin = true; // for testing purposes, remove in production
