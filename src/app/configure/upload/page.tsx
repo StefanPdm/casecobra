@@ -33,10 +33,11 @@ export default function Page() {
   const onDropRejected = (rejectedFiles: FileRejection[]) => {
     console.log('Files rejected:', rejectedFiles);
     const [file] = rejectedFiles;
+
     setIsDragOver(false);
     toast({
-      title: `${file.file.type} type is not allowed.`,
-      description: `Please choose a PNG, BMP, JPG or JPEG image instead.`,
+      title: `${file.errors[0].code}`,
+      description: `${file.errors[0].message}`,
       variant: 'destructive', // means the background turns red
     });
   };
