@@ -16,7 +16,7 @@ export default function Phone({ className, imgSrc, dark = false, ...props }: Pho
           width={896}
           height={1831}
           src={dark ? '/phone-template-dark-edges.png' : '/phone-template-white-edges.png'}
-          alt='phone'
+          alt='phone image'
           className='pointer-events-none z-50 select-none w-full h-auto'
         />
       </div>
@@ -26,7 +26,7 @@ export default function Phone({ className, imgSrc, dark = false, ...props }: Pho
           width={896}
           height={1831}
           src={imgSrc}
-          alt='overlaying image'
+          alt='overlaying phone image'
           className='object-cover'
         />
       </div>

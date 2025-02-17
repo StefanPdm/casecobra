@@ -19,6 +19,7 @@ const PHONES = [
 const COLUMNS = 3;
 
 function splitArray<T>(arr: Array<T> | [], cols: number) {
+  // <T> stands for any type of element that can be passed and return the same type of array
   const result: Array<Array<T>> = []; // empty Array without any index
   for (let i = 0; i < arr.length; i++) {
     const index = i % cols;
@@ -95,7 +96,7 @@ function Review({ imgSrc, className, ...props }: ReviewProps) {
 
 function ReviewGrid() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.4 });
+  const isInView = useInView(containerRef, { once: true, amount: 0.4 }); // useInView is part of framer-motion
   const columns = splitArray(PHONES, COLUMNS);
   const column1 = columns[0];
   const column2 = columns[1];
@@ -131,8 +132,8 @@ function ReviewGrid() {
           />
         </>
       ) : null}
-      <div className='pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-100' />
-      <div className='pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-slate-100' />
+      <div className='pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100' />
+      <div className='pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-100' />
     </div>
   );
 }

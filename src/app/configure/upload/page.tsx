@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { useUploadThing } from '@/lib/uploadthing';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from '@/components/ui/toast';
 
 export default function Page() {
   const { toast } = useToast();
@@ -36,8 +37,10 @@ export default function Page() {
 
     setIsDragOver(false);
     toast({
-      title: `${file.errors[0].code}`,
-      description: `${file.errors[0].message}`,
+      // Error notification with Toast component from @shadncn/ui
+      title: `"${file.file.type}"-Filetyp is not supported.`,
+      description: `Please upload a valid image file. Supported formats: PNG, JPG, JPEG, WebP, TIFF, BMP.`,
+      action: <ToastAction altText='Try again'>Try again</ToastAction>,
       variant: 'destructive', // means the background turns red
     });
   };

@@ -110,8 +110,7 @@ export default function Home() {
                     height={60}
                     alt=''
                     className='inline-block h-10 w-10 rounded-full
-                  ring-2 ring-slate-100 cover
-                  '
+                  ring-2 ring-slate-100 object-cover'
                   />
                 </div>
                 <div
@@ -281,7 +280,7 @@ export default function Home() {
                 className='order-1 mt-2 tracking-tight text-center text-balance 
                  !leading-tight font-bold text-5xl md:text-6xl text-gray-900
                    '>
-                Upload your photo and get{' '}
+                Upload your <span className='text-white bg-green-600 px-2 pb-1'>photo</span> and get{' '}
                 <span className='relative px-2 sm:text-nowrap'>
                   your own case
                   <Icons.underline
@@ -345,6 +344,7 @@ export default function Home() {
                 className={buttonVariants({
                   size: 'lg',
                   className: 'mx-auto mt-8',
+                  variant: 'default',
                 })}>
                 Create your case now <ArrowRight className='h-4 w-4 ml-1.5' />
               </Link>
